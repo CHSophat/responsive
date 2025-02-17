@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+     <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+      <!-- Chart.js for Graphs -->
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <title>School system managemnt </title>
+
+   <style>
+      body{
+        font-family: 'Poppins', sans-serif;
+        background-color: #f8f9fa;
+        min-width: 190vh;
+        
+      }
+   </style>
+</head>
+<body class="light-mode">
+    <!-- Navbar -->
+   
+    <nav class="navbar navbar-expand-lg navbar- fixed-top">
+      <div class="container-fluid">
+          <!-- Sidebar Toggle Button -->
+          <button class="btn btn-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+      </div>
+</nav>
+
+<style>
+  /* Glow Effect for Nav Links */
+  .glow-effect:hover {
+      color: #1abc9c !important;
+      text-shadow: 0 0 5px rgba(26, 188, 156, 0.7);
+  }
+
+  /* Profile Image Frame */
+  .profile-frame {
+      width: 100px;
+      height: 100px;
+      border: 4px solid #1abc9c;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 0 auto 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .profile-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+  }
+
+  /* Dropdown Menu Styling */
+  .dropdown-menu {
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      width: 250px;
+  }
+
+  .dropdown-header {
+      font-weight: 600;
+      color: #2c3e50;
+      text-align: center;
+      margin-bottom: 10px;
+  }
+
+  .dropdown-item {
+      padding: 8px 16px;
+      border-radius: 5px;
+      transition: background 0.3s;
+  }
+
+  .dropdown-item:hover {
+      background: #f8f9fa;
+  }
+</style>
+<!-- Sidenav (offcanvas) -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasSidebar" aria-labelledby="offcanvasSidebarLabel">
+    <div class="offcanvas-header">
+      <div id="offcanvasSidebar">
+        <h5 id="offcanvasSidebarLabel">
+          <span id="echoText">School</span>System
+        </h5>
+      </div>
+      <button class="btn-close btn-close-white" type="button" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+
+    <div class="offcanvas-body">
+      <ul class="nav flex-column">
+        <!-- Accordion Item 1: Dashboard -->
+        <li class="nav-item">
+          <a class="glow-nav-link" data-bs-toggle="collapse" href="#dashboardCollapse" role="button" aria-expanded="false" aria-controls="dashboardCollapse">
+            <i class="bi bi-grid"></i> Dashboard
+          </a>
+          <div class="collapse" id="dashboardCollapse">
+            <ul class="nav flex-column ms-3">
+              <li class="nav-item">
+                <a class="nav-link text-secondary" href="#">Overview</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-secondary" href="#">Analytics</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+  
+        <!-- Accordion Item 2: Student Management -->
+        <li class="nav-item">
+          <a class="glow-nav-link" data-bs-toggle="collapse" href="#studentCollapse" role="button" aria-expanded="false" aria-controls="studentCollapse">
+            <i class="bi bi-person-fill"></i> Student Management
+          </a>
+          <div class="collapse" id="studentCollapse">
+            <ul class="nav flex-column ms-3">
+              <li class="nav-item">
+                <a class="nav-link text-secondary" href="#">Add Student</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-secondary" href="#">View Students</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-secondary" href="#">Edit Student</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+  
+        <!-- Accordion Item 3: Teacher Management -->
+        <li class="nav-item">
+          <a class="glow-nav-link" data-bs-toggle="collapse" href="#teacherCollapse" role="button" aria-expanded="false" aria-controls="teacherCollapse">
+            <i class="bi bi-person-badge"></i> Teacher Management
+          </a>
+          <div class="collapse" id="teacherCollapse">
+            <ul class="nav flex-column ms-3">
+              <li class="nav-item">
+                <a class="nav-link text-secondary" href="#">Add Teacher</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-secondary" href="#">View Teachers</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-secondary" href="#">Edit Teacher</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+  
+        <!-- Accordion Item 4: Attendance -->
+        <li class="nav-item">
+          <a class="glow-nav-link" data-bs-toggle="collapse" href="#attendanceCollapse" role="button" aria-expanded="false" aria-controls="attendanceCollapse">
+            <i class="bi bi-calendar-check"></i> Attendance
+          </a>
+          <div class="collapse" id="attendanceCollapse">
+            <ul class="nav flex-column ms-3">
+              <li class="nav-item">
+                <a class="nav-link text-secondary" href="#">Mark Attendance</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-secondary" href="#">View Attendance</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+  
+        <!-- Accordion Item 5: Exams -->
+        <li class="nav-item">
+          <a class="glow-nav-link" data-bs-toggle="collapse" href="#examCollapse" role="button" aria-expanded="false" aria-controls="examCollapse">
+            <i class="bi bi-journal-text"></i> Exams
+          </a>
+          <div class="collapse" id="examCollapse">
+            <ul class="nav flex-column ms-3">
+              <li class="nav-item">
+                <a class="nav-link text-secondary" href="#">Schedule Exam</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-secondary" href="#">View Results</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+  
+        <!-- Accordion Item 6: Fees -->
+        <li class="nav-item">
+          <a class="glow-nav-link" data-bs-toggle="collapse" href="#feesCollapse" role="button" aria-expanded="false" aria-controls="feesCollapse">
+            <i class="bi bi-cash"></i> Fees
+          </a>
+          <div class="collapse" id="feesCollapse">
+            <ul class="nav flex-column ms-3">
+              <li class="nav-item">
+                <a class="nav-link text-secondary" href="#">Collect Fees</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-secondary" href="#">View Fee Records</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+  
+        <!-- Accordion Item 7: Library -->
+        <li class="nav-item">
+          <a class="glow-nav-link" data-bs-toggle="collapse" href="#libraryCollapse" role="button" aria-expanded="false" aria-controls="libraryCollapse">
+            <i class="bi bi-book"></i> Library
+          </a>
+          <div class="collapse" id="libraryCollapse">
+            <ul class="nav flex-column ms-3">
+              <li class="nav-item">
+                <a class="nav-link text-secondary" href="#">Add Book</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-secondary" href="#">Issue Book</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-secondary" href="#">Return Book</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+  
+        <!-- Accordion Item 8: Notifications -->
+        <li class="nav-item">
+          <a class="glow-nav-link" data-bs-toggle="collapse" href="#notificationCollapse" role="button" aria-expanded="false" aria-controls="notificationCollapse">
+            <i class="bi bi-bell"></i> Notifications
+          </a>
+          <div class="collapse" id="notificationCollapse">
+            <ul class="nav flex-column ms-3">
+              <li class="nav-item">
+                <a class="nav-link text-secondary" href="#">Send Notification</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-secondary" href="#">View Notifications</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+  
+        <!-- Accordion Item 9: Reports -->
+        <li class="nav-item">
+          <a class="glow-nav-link" data-bs-toggle="collapse" href="#reportCollapse" role="button" aria-expanded="false" aria-controls="reportCollapse">
+            <i class="bi bi-bar-chart"></i> Reports
+          </a>
+          <div class="collapse" id="reportCollapse">
+            <ul class="nav flex-column ms-3">
+              <li class="nav-item">
+                <a class="nav-link text-secondary" href="#">Generate Report</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-secondary" href="#">View Reports</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+  
+        <!-- Accordion Item 10: Settings -->
+        <li class="nav-item">
+          <a class="glow-nav-link" data-bs-toggle="collapse" href="#settingsCollapse" role="button" aria-expanded="false" aria-controls="settingsCollapse">
+            <i class="bi bi-gear"></i> Settings
+          </a>
+          <div class="collapse" id="settingsCollapse">
+            <ul class="nav flex-column ms-3">
+              <li class="nav-item">
+                <a class="nav-link text-secondary" href="#">General Settings</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-secondary" href="#">User Management</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+                <!-- Accordion Item 4: Admin -->
+      <li class="nav-item">
+        <a class="glow-nav-link" data-bs-toggle="collapse" href="#adminCollapse" role="button" aria-expanded="false" aria-controls="adminCollapse">
+          <i class="bi bi-shield-lock"></i> Admin
+        </a>
+        <div class="collapse" id="adminCollapse">
+          <ul class="nav flex-column ms-3">
+            <li class="nav-item">
+              <a class="nav-link text-secondary" href="#">User Management</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-secondary" href="#">System Settings</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-secondary" href="#">Permissions</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-secondary" href="#">Audit Logs</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <!-- Accordion Item 5: Profile -->
+      <li class="nav-item">
+        <a class="glow-nav-link" data-bs-toggle="collapse" href="#profileCollapse" role="button" aria-expanded="false" aria-controls="profileCollapse">
+          <i class="bi bi-person-circle"></i> Profile
+        </a>
+        <div class="collapse" id="profileCollapse">
+          <ul class="nav flex-column ms-3">
+            <li class="nav-item">
+              <a class="nav-link text-secondary" href="#">View Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-secondary" href="#">Edit Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-secondary" href="#">Change Password</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-secondary" href="#">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      </ul>
+    </div>
+  </div>
+
+  <style>
+    
+    /* Custom Glow Effect for Links */
+    .glow-nav-link {
+      color: #ffffff;
+      text-decoration: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+      display: block;
+    }
+
+    .glow-nav-link:hover {
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+      transform: translateX(5px);
+    }
+
+    /* Offcanvas Header */
+    .offcanvas-header {
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      color: white;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Offcanvas Body */
+    .offcanvas-body {
+      background: #2c3e50;
+      color: white;
+    }
+
+    /* Nested Links */
+    .nav-link.text-secondary {
+      color: #bdc3c7 !important;
+      padding: 8px 15px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-link.text-secondary:hover {
+      color: #ffffff !important;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 5px;
+    }
+
+    /* Accordion Collapse */
+    .collapse {
+      margin-left: 10px;
+      border-left: 2px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Close Button */
+    .btn-close.btn-close-white {
+      filter: invert(1);
+    }
+  </style>
+  
+
+
+  <section class="dashboard-content container my-5 p-5">
+    <h2 class="text-center mb-5">Dashboard</h2>
+
+    <!-- Tabs -->
+ 
+    <!-- Tab Content -->
+    <div class="tab-content" id="myTabContent">
+      <!-- Teachers Tab -->
+      <div class="tab-pane fade show active" id="teachers" role="tabpanel" aria-labelledby="teachers-tab">
+        <h5>Total Members: 3</h5>
+
+        <!-- Search Bar -->
+        <div class="d-flex justify-content-end mb-4">
+          <div class="search-bar" style="max-width: 400px;">
+            <input type="text" class="form-control" placeholder="Search Teachers..." aria-label="Search">
+          </div>
+        </div>
+
+        <!-- Table -->
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Teacher Name</th>
+                <th scope="col">Teacher ID</th>
+                <th scope="col">Joining Date</th>
+                <th scope="col">Type of Teacher</th>
+                <th scope="col">Professional Details</th>
+                <th scope="col">Subject Specialization</th>
+                <th scope="col">Phone Number</th>
+                <th scope="col">Email</th>
+                <th scope="col">Status</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>John Doe</td>
+                <td>TCH001</td>
+                <td>2023-01-15</td>
+                <td>Full-Time</td>
+                <td>Bachelor's Degree in Education</td>
+                <td>Mathematics</td>
+                <td>+123 456 7890</td>
+                <td>johndoe@example.com</td>
+                <td><span class="badge bg-success">Available</span></td>
+                <td>
+                  <div class="btn-group-vertical d-md-inline-flex d-block">
+                    <button class="btn btn-primary me-md-2 mb-2" type="submit">Add</button>
+                    <button class="btn btn-sm btn-custom me-md-2 mb-2"><i class="fas fa-edit"></i> Update</button>
+                    <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Delete</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>Jane Smith</td>
+                <td>TCH002</td>
+                <td>2023-02-20</td>
+                <td>Part-Time</td>
+                <td>Master's Degree in Literature</td>
+                <td>English</td>
+                <td>+987 654 3210</td>
+                <td>janesmith@example.com</td>
+                <td><span class="badge bg-warning">Inactive</span></td>
+                <td>
+                  <div class="btn-group-vertical d-md-inline-flex d-block">
+                    <button class="btn btn-primary me-md-2 mb-2" type="submit">Add</button>
+                    <button class="btn btn-sm btn-custom me-md-2 mb-2"><i class="fas fa-edit"></i> Update</button>
+                    <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Delete</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>Michael Brown</td>
+                <td>TCH003</td>
+                <td>2023-03-10</td>
+                <td>Contractual</td>
+                <td>PhD in Science</td>
+                <td>Science</td>
+                <td>+555 555 5555</td>
+                <td>michaelbrown@example.com</td>
+                <td><span class="badge bg-danger">On Leave</span></td>
+                <td>
+                  <div class="btn-group-vertical d-md-inline-flex d-block">
+                    <button class="btn btn-primary me-md-2 mb-2" type="submit">Add</button>
+                    <button class="btn btn-sm btn-custom me-md-2 mb-2"><i class="fas fa-edit"></i> Update</button>
+                    <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Delete</button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Students Tab -->
+      <div class="tab-pane fade" id="students" role="tabpanel" aria-labelledby="students-tab">
+        <h5>Total Members: 5</h5>
+
+        <!-- Table -->
+        <section class="dashboard-content container my-5 p-5">
+          <div class="form-container">
+              <h2 class="text-center">Ifomation Teacher</h2>
+              <form>
+                <!-- Row 1: Name and Teacher ID -->
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <label for="teacherName" class="form-label">Teacher Name</label>
+                    <input type="text" class="form-control" id="teacherName" placeholder="Enter teacher's name" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="teacherID" class="form-label">Teacher ID</label>
+                    <input type="text" class="form-control" id="teacherID" placeholder="Enter teacher's ID" required>
+                  </div>
+                </div>
+      
+                <!-- Row 2: Email and Phone -->
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter email address" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="phone" class="form-label">Phone Number</label>
+                    <input type="tel" class="form-control" id="phone" placeholder="Enter phone number" required>
+                  </div>
+                </div>
+      
+                <!-- Row 3: Subject and Qualifications -->
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <label for="subject" class="form-label">Subject specialization</label>
+                    <select class="form-select" id="subject" required>
+                      <option value="" disabled selected>Select subject</option>
+                      <option value="Mathematics">Mathematics</option>
+                      <option value="Science">Science</option>
+                      <option value="English">English</option>
+                      <option value="History">History</option>
+                      <option value="Geography">Geography</option>
+                      <option value="Computer Science">Computer Science</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="subject" class="form-label">Department</label>
+                    <select class="form-select" id="subject" required>
+                      <option value="" disabled selected>Select subject</option>
+                      <option value="Mathematics">Faculty Of Engineering</option>
+                    
+                      
+                    </select>
+                  </div>  
+                </div>
+      
+                <!-- Row 4: Status and Joining Date -->
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <label for="status" class="form-label">Status</label>
+                    <select class="form-select" id="status" required>
+                      <option value="" disabled selected>Select status</option>
+                      <option value="Active">Active</option>
+                      <option value="Inactive">Inactive</option>
+                      <option value="On Leave">On Leave</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="joiningDate" class="form-label">Joining Date</label>
+                    <input type="date" class="form-control" id="joiningDate" required>
+                  </div>
+                </div>
+      
+                   <div class="row mb-3">
+                  <div class="col-md-6">
+                    <label for="status" class="form-label">Types of Teachers</label>
+                    <select class="form-select" id="status" required>
+                      <option value="" disabled selected>Select </option>
+                      <option value="Active">Preschool Teachers:</option>
+                      <option value="Inactive">Elementary School Teachers:</option>
+                      <option value="On Leave">Middle School Teachers:</option>
+                      <option value="On Leave">High School Teachers:</option>
+                      <option value="On Leave">Special Education Teachers:</option>
+                      <option value="On Leave">College/University Professors:</option>
+                      <option value="On Leave">Vocational Teachers:</option>
+                      <option value="On Leave">Online Teachers:</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="status" class="form-label">Professional Details</label>
+                    <select class="form-select" id="status" required>
+                      <option value="" disabled selected>Select </option>
+                      <option value="Active">Qualifications</option>
+                      <option value="Inactive"> certifications</option>
+                      <option value="On Leave">teaching experience</option>
+                    
+                    </select>
+                  </div>
+                </div>
+      
+                
+      
+                <!-- Submit Button -->
+                <div class="d-grid gap-2 mt-4">
+                  <button type="submit" class="btn btn-custom">Add Teacher</button>
+                </div>
+              </form>
+            </div>
+      </section>
+
+      </div>
+    </div>
+  </section>
+  <style>
+      .dashboard-content {
+      background-color: #ffffff; /* Light background */
+      padding: 4rem 0; /* Add padding for spacing */
+      border-radius: 15px; /* Rounded corners for the section */
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+      min-width: 140vh;
+      min-height: auto;
+    }
+    .search-bar {
+      width: 100%;
+      max-width: 400px;
+      margin-bottom: 2rem;
+    }
+    .search-bar input {
+      border: 1px solid #ddd;
+      border-radius: 50px;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+    .search-bar input:focus {
+      border-color: #1e3c72;
+      box-shadow: 0 0 5px rgba(30, 60, 114, 0.5);
+    }
+    .table-responsive {
+      border-radius: 15px;
+      overflow: hidden;
+    }
+    .table {
+      background-color: #ffffff;
+      border: none;
+      border-radius: 15px;
+    }
+    .table thead th {
+      background-color: #1e3c72;
+      color: #fff;
+      border: none;
+    }
+    .table tbody tr:hover {
+      background-color: #f1f1f1;
+    }
+    .btn-custom {
+      background-color: #1e3c72;
+      border: none;
+      color: #fff;
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      transition: background-color 0.3s ease;
+    }
+    .btn-custom:hover {
+      background-color: #2a5298;
+    }
+  </style>
+      
+        <!-- Product Cards -->
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    
+</body>
+</html>
